@@ -137,10 +137,14 @@ abstract class AbstractRequest
                 $exception = null;
                 $response  = json_decode($responseBody);
 
-                foreach ($response as $error) {
-                    $cieloError = new CieloError($error->Message, $error->Code);
-                    $exception  = new CieloRequestException('Request Error', $statusCode, $exception);
-                    $exception->setCieloError($cieloError);
+                if (is_array($response) && count($response) > 0) {
+                    foreach ($response as $error) {
+                        $cieloError = new CieloError($error->Message, $error->Code);
+                        $exception  = new CieloRequestException('Request Error', $statusCode, $exception);
+                        $exception->setCieloError($cieloError);
+                    }
+                } else {
+                    $exception  = new CieloRequestException("Request Error $statusCode, response: $responseBody", $statusCode);
                 }
 
                 throw $exception;
