@@ -18,6 +18,8 @@ class Payment implements \JsonSerializable
 
     const PAYMENTTYPE_BOLETO = 'Boleto';
 
+    const PAYMENTTYPE_PIX = 'Pix';
+    
     const PROVIDER_BRADESCO = 'Bradesco';
 
     const PROVIDER_BANCO_DO_BRASIL = 'BancoDoBrasil';
@@ -107,6 +109,12 @@ class Payment implements \JsonSerializable
     private $identification;
 
     private $instructions;
+   
+    private $acquirerTransactionId;
+    
+    private $qrcodeBase64Image;
+    
+    private $qrCodeString;
 
     /**
      * Payment constructor.
@@ -194,6 +202,10 @@ class Payment implements \JsonSerializable
         $this->demonstrative  = isset($data->Demonstrative) ? $data->Demonstrative : null;
         $this->identification = isset($data->Identification) ? $data->Identification : null;
         $this->instructions   = isset($data->Instructions) ? $data->Instructions : null;
+
+        $this->acquirerTransactionId   = isset($data->AcquirerTransactionId) ? $data->AcquirerTransactionId : null;
+        $this->qrcodeBase64Image       = isset($data->QrcodeBase64Image) ? $data->QrcodeBase64Image : null;
+        $this->qrCodeString            = isset($data->QrCodeString) ? $data->QrCodeString : null;
     }
 
     /**
@@ -263,6 +275,17 @@ class Payment implements \JsonSerializable
         $this->setRecurrentPayment($recurrentPayment);
 
         return $recurrentPayment;
+    }
+    
+    /**
+     * 
+     * @return $this
+     */
+    public function pix()
+    {
+        $this->setType(self::PAYMENTTYPE_PIX);
+
+        return $this;
     }
 
     /**
@@ -1104,4 +1127,66 @@ class Payment implements \JsonSerializable
 
         return $this;
     }
+    
+    /**
+     * @return string|NULL
+     */
+    public function getAcquirerTransactionId()
+    {
+        return $this->acquirerTransactionId;
+    }
+
+    /**
+     * @param $acquirerTransactionId
+     * 
+     * @return $this
+     */
+    public function setAcquirerTransactionId($acquirerTransactionId)
+    {
+        $this->acquirerTransactionId = $acquirerTransactionId;
+        
+        return $this;
+    }
+
+    /**
+     * @return string|NULL
+     */
+    public function getQrcodeBase64Image()
+    {
+        return $this->qrcodeBase64Image;
+    }
+
+    /**
+     * @param $qrcodeBase64Image
+     * 
+     * @return $this
+     * 
+     */
+    public function setQrcodeBase64Image($qrcodeBase64Image)
+    {
+        $this->qrcodeBase64Image = $qrcodeBase64Image;
+        
+        return $this;
+    }
+
+    /**
+     * @return string|NULL
+     */
+    public function getQrCodeString()
+    {
+        return $this->qrCodeString;
+    }
+
+    /**
+     * @param $qrCodeString
+     * 
+     * @return $this
+     */
+    public function setQrCodeString($qrCodeString)
+    {
+        $this->qrCodeString = $qrCodeString;
+        
+        return $this;
+    }
+
 }
