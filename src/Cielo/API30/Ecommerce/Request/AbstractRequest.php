@@ -148,6 +148,8 @@ abstract class AbstractRequest
                 }
 
                 throw $exception;
+            case 401:
+                throw new CieloRequestException('HTTP 401 NotAuthorized', $statusCode, null);
             case 404:
                 throw new CieloRequestException('Resource not found', 404, null);
             default:
