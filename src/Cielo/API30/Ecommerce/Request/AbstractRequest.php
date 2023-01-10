@@ -153,7 +153,7 @@ abstract class AbstractRequest
             case 404:
                 throw new CieloRequestException('Resource not found', 404, null);
             default:
-                throw new CieloRequestException('Unknown status', $statusCode);
+                throw new CieloRequestException("Unknown statusCode $statusCode, response: $responseBody", $statusCode);
         }
 
         return $unserialized;
