@@ -9,6 +9,7 @@ SDK API-3.0 PHP
     * [x] Com autorização na primeira recorrência.
     * [x] Com autorização a partir da primeira recorrência.
 * [x] Pagamentos por cartão de débito.
+* [x] Pagamentos por pix.
 * [x] Pagamentos por boleto.
 * [x] Pagamentos por transferência eletrônica.
 * [x] Cancelamento de autorização.
@@ -29,20 +30,25 @@ Se já possui um arquivo `composer.json`, basta adicionar a seguinte dependênci
 
 ```json
 "require": {
-    "developercielo/api-3.0-php": "^1.0"
+    "developercielo/api-3.0-php": "^2.0.0"
 }
+```
+
+Adicionar o `repositories` no `composer.json`
+
+```json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/edson-nascimento/API-3.0-PHP"
+    }
+],
 ```
 
 Com a dependência adicionada ao `composer.json`, basta executar:
 
 ```
-composer install
-```
-
-Alternativamente, você pode executar diretamente em seu terminal:
-
-```
-composer require "developercielo/api-3.0-php"
+composer update
 ```
 
 ## Produtos e Bandeiras suportadas e suas constantes
