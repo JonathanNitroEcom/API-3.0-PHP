@@ -42,7 +42,7 @@ class UpdateSaleRequest extends AbstractRequest
     /**
      * @param $paymentId
      *
-     * @return null
+     * @return Payment
      * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException
      * @throws \RuntimeException
      */

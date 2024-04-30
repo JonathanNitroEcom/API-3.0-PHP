@@ -208,10 +208,7 @@ class Payment implements \JsonSerializable
         $this->qrCodeString            = isset($data->QrCodeString) ? $data->QrCodeString : null;
     }
 
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }
@@ -284,6 +281,7 @@ class Payment implements \JsonSerializable
     public function pix()
     {
         $this->setType(self::PAYMENTTYPE_PIX);
+        $this->setCapture(true);
 
         return $this;
     }

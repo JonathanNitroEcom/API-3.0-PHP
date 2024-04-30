@@ -26,10 +26,7 @@ class Address implements CieloSerializable
 
     private $district;
 
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }

@@ -21,7 +21,7 @@ Por envolver a interface de usuário da aplicação, o SDK funciona apenas como 
 
 ## Dependências
 
-* PHP >= 5.6
+* PHP >= 8.3
 
 ## Instalando o SDK
 
@@ -422,6 +422,23 @@ try {
     // os códigos de erro estão todos disponíveis no manual de integração.
     $error = $e->getCieloError();
 }
+```
+
+### Criando uma venda com PIX
+
+```php
+<?php
+// ...
+$sale = new Sale('123');
+
+$customer = $sale->customer('Fulano de Tal');
+
+$payment = $sale->payment(15700);
+$payment->pix();
+$payment->setCapture(true);
+
+$sale = (new CieloEcommerce($merchant, $environment))->createSale($sale);
+// ...
 ```
 
 ### Tokenizando um cartão
