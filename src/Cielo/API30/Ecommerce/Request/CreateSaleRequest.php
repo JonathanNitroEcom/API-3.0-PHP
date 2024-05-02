@@ -34,7 +34,7 @@ class CreateSaleRequest extends AbstractRequest
     /**
      * @param $sale
      *
-     * @return null
+     * @return Sale
      * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException
      * @throws \RuntimeException
      */

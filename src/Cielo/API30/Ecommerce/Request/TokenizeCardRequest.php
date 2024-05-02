@@ -1,5 +1,4 @@
 <?php
-
 namespace Cielo\API30\Ecommerce\Request;
 
 use Cielo\API30\Ecommerce\CreditCard;
@@ -16,25 +15,31 @@ class TokenizeCardRequest extends AbstractRequest
 {
 
     private $environment;
-    /** @var Merchant $merchant */
+
+    /**
+     * TODO not used
+     * @var Merchant $merchant
+     * @phpstan-ignore-next-line
+     */
     private $merchant;
 
-	/**
-	 * CreateCardTokenRequestHandler constructor.
-	 *
-	 * @param Merchant $merchant
-	 * @param Environment $environment
-	 * @param LoggerInterface|null $logger
-	 */
+    /**
+     * CreateCardTokenRequestHandler constructor.
+     *
+     * @param Merchant $merchant
+     * @param Environment $environment
+     * @param LoggerInterface|null $logger
+     */
     public function __construct(Merchant $merchant, Environment $environment, LoggerInterface $logger = null)
     {
         parent::__construct($merchant, $logger);
 
-        $this->merchant    = $merchant;
+        $this->merchant = $merchant;
         $this->environment = $environment;
     }
 
     /**
+     *
      * @inheritdoc
      */
     public function execute($param)
@@ -45,6 +50,7 @@ class TokenizeCardRequest extends AbstractRequest
     }
 
     /**
+     *
      * @inheritdoc
      */
     protected function unserialize($json)

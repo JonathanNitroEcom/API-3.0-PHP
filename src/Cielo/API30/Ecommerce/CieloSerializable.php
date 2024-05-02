@@ -12,7 +12,7 @@ interface CieloSerializable extends \JsonSerializable
     /**
      * @param \stdClass $data
      *
-     * @return mixed
+     * @return void
      */
     public function populate(\stdClass $data);
 }

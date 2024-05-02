@@ -1,0 +1,17 @@
+parameters:
+    level: 5
+    phpVersion: 80300
+    checkFunctionNameCase: true
+    checkInternalClassCaseSensitivity: true
+    reportMaybesInPropertyPhpDocTypes: true
+    checkExplicitMixedMissingReturn: true
+    reportMaybesInMethodSignatures: true
+    reportStaticMethodSignatures: true
+    checkTooWideReturnTypesInProtectedAndPublicMethods: true
+    checkDynamicProperties: true
+    reportAlwaysTrueInLastCondition: true
+    paths:
+        - ./
+    excludePaths:
+        - ./vendor/*
+    ignoreErrors:
