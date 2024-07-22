@@ -97,10 +97,7 @@ class RecurrentPayment implements \JsonSerializable
         $this->status        = isset($data->Status) ? $data->Status : null;
     }
 
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }

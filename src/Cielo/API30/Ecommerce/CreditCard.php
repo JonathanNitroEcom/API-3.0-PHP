@@ -111,10 +111,7 @@ class CreditCard implements \JsonSerializable, CieloSerializable
         $this->customerName   = isset($data->CustomerName) ? $data->CustomerName : null;
     }
 
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }

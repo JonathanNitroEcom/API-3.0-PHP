@@ -19,7 +19,7 @@ class Sale implements \JsonSerializable
     /**
      * Sale constructor.
      *
-     * @param null $merchantOrderId
+     * @param string|int $merchantOrderId
      */
     public function __construct($merchantOrderId = null)
     {
@@ -33,7 +33,7 @@ class Sale implements \JsonSerializable
      */
     public static function fromJson($json)
     {
-        $object = json_decode($json);
+        $object = json_decode($json) ?: json_decode(gzdecode($json));
 
         $sale = new Sale();
         $sale->populate($object);
@@ -63,10 +63,7 @@ class Sale implements \JsonSerializable
         }
     }
 
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }

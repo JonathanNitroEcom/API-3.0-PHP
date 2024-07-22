@@ -27,10 +27,7 @@ class CieloEcommerce
 	 * requests will be send
 	 *
 	 * @param Merchant $merchant
-	 *            The merchant credentials
-	 * @param Environment environment
-	 *            The environment: {@link Environment::production()} or
-	 *            {@link Environment::sandbox()}
+	 * @param Environment $environment
 	 * @param LoggerInterface|null $logger
 	 */
     public function __construct(Merchant $merchant, Environment $environment = null, LoggerInterface $logger = null)
@@ -117,7 +114,7 @@ class CieloEcommerce
      * @param integer $amount
      *            Order value in cents
      *
-     * @return Sale The Sale with authorization, tid, etc. returned by Cielo.
+     * @return \Cielo\API30\Ecommerce\Payment
      *
      * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException if anything gets wrong.
      *

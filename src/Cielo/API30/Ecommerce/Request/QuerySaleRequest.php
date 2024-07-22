@@ -34,7 +34,7 @@ class QuerySaleRequest extends AbstractRequest
     /**
      * @param $paymentId
      *
-     * @return null
+     * @return Sale
      * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException
      * @throws \RuntimeException
      */

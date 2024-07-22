@@ -49,7 +49,7 @@ abstract class AbstractRequest
     {
         $headers = [
             'Accept: application/json',
-            'Accept-Encoding: gzip',
+            //'Accept-Encoding: gzip',
             'User-Agent: CieloEcommerce/3.0 PHP SDK',
             'MerchantId: ' . $this->merchant->getId(),
             'MerchantKey: ' . $this->merchant->getKey(),
@@ -104,7 +104,9 @@ abstract class AbstractRequest
         if (curl_errno($curl)) {
             $message = sprintf('cURL error[%s]: %s', curl_errno($curl), curl_error($curl));
 
-            $this->logger->error($message);
+            if ($this->logger !== null) {
+                $this->logger->error($message);
+            }
 
             throw new \RuntimeException($message);
         }
@@ -135,17 +137,23 @@ abstract class AbstractRequest
                 $exception = null;
                 $response  = json_decode($responseBody);
 
-                foreach ($response as $error) {
-                    $cieloError = new CieloError($error->Message, $error->Code);
-                    $exception  = new CieloRequestException('Request Error', $statusCode, $exception);
-                    $exception->setCieloError($cieloError);
+                if (is_array($response) && count($response) > 0) {
+                    foreach ($response as $error) {
+                        $cieloError = new CieloError($error->Message, $error->Code);
+                        $exception  = new CieloRequestException('Request Error', $statusCode, $exception);
+                        $exception->setCieloError($cieloError);
+                    }
+                } else {
+                    $exception  = new CieloRequestException("Request Error $statusCode, response: $responseBody", $statusCode);
                 }
 
                 throw $exception;
+            case 401:
+                throw new CieloRequestException('HTTP 401 NotAuthorized', $statusCode, null);
             case 404:
                 throw new CieloRequestException('Resource not found', 404, null);
             default:
-                throw new CieloRequestException('Unknown status', $statusCode);
+                throw new CieloRequestException("Unknown statusCode $statusCode, response: $responseBody", $statusCode);
         }
 
         return $unserialized;
